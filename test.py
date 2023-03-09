@@ -3,6 +3,7 @@ from googleapiclient.discovery import build
 import pandas as pd
 from get_data import get_channel_stats, get_video_ids, get_video_details
 
+
 st.title('YouTube Data Automation')
 st.subheader('by Vamshi Munukuntla')
 
@@ -28,6 +29,10 @@ if youtube_api == "AIzaSyBZMdAN2JOSqAQ96ZbO2SBatXmB0wUwxGM":
 st.write('#')
 channel_id = st.text_input(label='Please enter the YOUTUBE CHANNEL ID')
 if st.button('Few Channel ids you can try: '):
+    # st.write("Channel Name: Channel_id")
+    # st.write("Krish Naik: UCNU_lfiiWBdtULKOw6X0Dig")
+    # st.write("Kirby Ferguson: UCu-3YlvaBS4bsya-1eFi62w")
+    # st.write("Shivan: UCU3PwUp0RENg1dLlldjjx3w")
     ids = pd.read_csv('channel_ids.csv')
     st.table(ids)
 
@@ -41,12 +46,13 @@ if (youtube_api != "") & (channel_id != ""):
     st.success(f"Fetching data from {Channel_name.upper()}'s channel.")
 
     playlist_ids = channel_data['playlist_id'][0]
-    st.markdown('This takes a while, please be patient.')
+    st.caption('This takes a while, please be patient.')
 
     video_ids = get_video_ids(youtube, playlist_ids)
     video_details = get_video_details(youtube, video_ids)
+    st.write('#')
 
-    st.caption('Top 5 Recently uploaded Videos')
+    st.markdown('Top 5 Recently uploaded Videos')
     final_df = pd.DataFrame(video_details)
     st.dataframe(final_df.head())
 
@@ -65,6 +71,3 @@ if (youtube_api != "") & (channel_id != ""):
         file_name='youtube_data.csv',
         mime='text/csv',
     )
-
-# api_key = "AIzaSyBZM6dAN2JOqAQ9g6ZbO2SatXmB0wUwxGM"
-# channel_ids = "UCNU_lfiiWBdtULKOw6X0Dig"
