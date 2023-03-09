@@ -3,12 +3,19 @@ from googleapiclient.discovery import build
 import pandas as pd
 from get_data import get_channel_stats, get_video_ids, get_video_details
 
-
 st.title('YouTube Data Automation')
 st.subheader('by Vamshi Munukuntla')
-st.write('Follow me on : ')
-st.button('Github', 'https://github.com/Vamshi-Munukuntla', "Vamshi Munukuntla")
-st.button('LinkedIn', "https://www.linkedin.com/in/vamshi-kumar87/", "Vamshi Munukuntla")
+
+SOCIAL_MEDIA = {
+    "GitHub": "https://github.com/Vamshi-Munukuntla",
+    "LinkedIn": "https://www.linkedin.com/in/vamshi-kumar87/"
+}
+
+
+st.write('#')
+cols = st.columns(len(SOCIAL_MEDIA))
+for index, (platform, link) in enumerate(SOCIAL_MEDIA.items()):
+    cols[index].write(f"[{platform}]({link})")
 
 
 youtube_api = st.text_input(label='Please enter the youtube api key: ')
