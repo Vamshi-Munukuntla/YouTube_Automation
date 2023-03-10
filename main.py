@@ -68,5 +68,3 @@ if (youtube_api != "") & (channel_id != ""):
         mime='text/csv',
     )
 
-# api_key = "AIzaSyBZM6dAN2JOqAQ9g6ZbO2SatXmB0wUwxGM"
-# channel_ids = "UCNU_lfiiWBdtULKOw6X0Dig"
