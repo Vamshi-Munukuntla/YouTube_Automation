@@ -1,10 +1,11 @@
 import streamlit as st
 from googleapiclient.discovery import build
 import pandas as pd
-from get_data import get_channel_stats, get_video_ids, get_video_details
+from get_data import get_channel_stats, get_video_ids, get_video_details, convert_YouTube_duration_to_seconds
 
 st.title('YouTube Data Automation')
-st.subheader('by Vamshi Munukuntla')
+st.write('Get your favorite youtube channel data in matter of seconds.')
+st.subheader('Created by Vamshi Munukuntla')
 
 SOCIAL_MEDIA = {
     "GitHub": "https://github.com/Vamshi-Munukuntla",
@@ -48,6 +49,7 @@ if (youtube_api != "") & (channel_id != ""):
 
     st.caption('Top 5 Recently uploaded Videos')
     final_df = pd.DataFrame(video_details)
+    final_df['Video_Duration_in_seconds'] = final_df['Video_Duration'].apply(convert_YouTube_duration_to_seconds)
     st.dataframe(final_df.head())
 
     # Save the dataframe into a csv file
